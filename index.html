@@ -13,6 +13,9 @@
             --accent-hover: #a78bfa;
             --text-main: #f8fafc;
             --text-muted: #cbd5e1;
+            --warning-bg: rgba(251, 191, 36, 0.1);
+            --warning-border: rgba(251, 191, 36, 0.3);
+            --warning-text: #fbbf24;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,16 +26,16 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 20px 20px 80px; /* Отступ снизу для футера */
             overflow-x: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 900px;
-            min-height: 70vh;
             position: relative;
         }
 
@@ -159,10 +162,55 @@
             text-align: left;
         }
 
+        /* Новые стили */
+        .beta-warning {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        .rules-notice {
+            margin-top: 2.5rem;
+            padding: 1rem;
+            background: var(--warning-bg);
+            border: 1px solid var(--warning-border);
+            border-radius: 10px;
+            color: var(--warning-text);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .site-footer {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .site-footer .credits {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .page { padding: 30px 20px; }
             .back-btn { top: 1rem; left: 1rem; }
+            .beta-warning, .rules-notice { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -176,6 +224,7 @@
             <button onclick="showPage('connect')">Подключиться</button>
             <button onclick="showPage('rules')">Правила</button>
         </div>
+        <p class="beta-warning">Это бета версия сайта, мы просим прощение за малое количество предоставленной информации, в скором времени сайт станет лучше!</p>
     </div>
 
     <!-- Страница подключения -->
@@ -265,9 +314,16 @@
             <p><strong>3.2.</strong> При подключении к серверу игрок соглашается с тем, что Администрация вправе собирать, хранить и обрабатывать их данные.</p>
             <p><strong>3.3.</strong> Администрация обязуется не передавать персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством или необходимых для расследования нарушений. В случае появления сомнений у Администрации, она вправе запросить у игрока подтверждение этих данных (в случае отказа - игрок получает перманентный бан).</p>
             <p><strong>3.4.</strong> Только ранг Суперадмин имеет право нарушать правила.</p>
+
+            <div class="rules-notice">⚠️ Внимание: Сейчас сервер использует старые правила так как новые правила были удалены по не известным причинам. Просим вас перечитать правила если вы смотрели их до этого обновления.</div>
         </div>
     </div>
 </div>
+
+<footer class="site-footer">
+    <p>С уважением команда "Stroy"</p>
+    <p class="credits">Сделал и выложил LolDoor</p>
+</footer>
 
 <script>
     function showPage(pageId) {
