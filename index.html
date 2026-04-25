@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сервер Stroy</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a, #312e81, #6d28d9);
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #8b5cf6;
+            --accent-hover: #a78bfa;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            min-height: 70vh;
+            position: relative;
+        }
+
+        .page {
+            display: none;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(to right, #93c5fd, #c4b5fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        button {
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        button:active { transform: translateY(0); }
+
+        .back-btn {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            box-shadow: none;
+            z-index: 10;
+        }
+
+        .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: none; }
+
+        .content {
+            margin-top: 1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-height: 75vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .content::-webkit-scrollbar { width: 6px; }
+        .content::-webkit-scrollbar-track { background: transparent; }
+        .content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+
+        .content h2 {
+            color: var(--accent-hover);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+        .content h2:first-child { margin-top: 0; }
+
+        .content p { margin-bottom: 1rem; }
+        .content strong { color: #fff; }
+        .content em { color: #fbbf24; font-style: normal; }
+        .content code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: #34d399;
+        }
+
+        .sub-list {
+            list-style: none;
+            margin: 0.5rem 0 1rem 1.5rem;
+            border-left: 2px solid var(--glass-border);
+            padding-left: 1rem;
+        }
+        .sub-list li { margin-bottom: 0.4rem; position: relative; }
+        .sub-list li::before { content: "•"; color: var(--accent); margin-right: 8px; }
+
+        .instruction-box {
+            background: rgba(0,0,0,0.2);
+            border: 1px dashed var(--accent);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .page { padding: 30px 20px; }
+            .back-btn { top: 1rem; left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Главная страница -->
+    <div id="home" class="page active">
+        <h1>Сервер Stroy</h1>
+        <div class="btn-group">
+            <button onclick="showPage('connect')">Подключиться</button>
+            <button onclick="showPage('rules')">Правила</button>
+        </div>
+    </div>
+
+    <!-- Страница подключения -->
+    <div id="connect" class="page">
+        <button class="back-btn" onclick="showPage('home')">← Назад</button>
+        <h2 style="text-align: center; color: var(--accent-hover); margin-bottom: 1.5rem;">Инструкция по подключению</h2>
+        <div class="instruction-box">
+            <p>Чтобы подключиться на наш сервер:</p>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li>Зайдите в <strong>Garry's Mod</strong></li>
+                <li>Нажмите кнопку <code>ё</code> (тильда/консоль)</li>
+                <li>В открывшейся консоли введите:<br>
+                    <code style="font-size: 1.2rem; display: block; margin: 10px 0; text-align: center;">connect 144.31.61.234:27015</code>
+                </li>
+                <li>Нажмите <code>Enter</code> и вы зайдёте на сервер!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Страница правил -->
+    <div id="rules" class="page">
+        <button class="back-btn" onclick="showPage('home')">← Назад</button>
+        <div class="content">
+            <h2>1. Общее положение</h2>
+            <p><strong>1.1.</strong> Запрещено создавать помеху другим игрокам, находящимся в Build Mode, PvP (God Mode = Build Mode) или игрокам от ранга Администратор.<br><em>Наказание:</em> джайл на 10 минут, при повторных нарушениях - бан на 3 часа.</p>
+            
+            <p><strong>1.2.</strong> Запрещено своими действиями нарушать функционирование сервера, вызывая лаги/вылеты/краши.<br><em>Наказание:</em> перманентный бан.</p>
+            
+            <p><strong>1.3.</strong> Запрещено любыми способами обходить наказание, назначенное администрацией сервера.<br><em>Наказание:</em> бан на 3 дня.</p>
+            
+            <p><strong>1.4.</strong> Проп пуш, проп блок и проп серфинг запрещены.<br><em>Наказание:</em> 10 минут джайла, при повторных нарушениях - бан на 1 час.</p>
+            
+            <p><strong>1.5.</strong> Запрещены спам, флуд, изменение голоса, раздражающие/неприятные звуки; проигрывание посторонних звуков.<br><em>Исключение:</em> разрешено в локальном режиме, если музыка не нарушает 1.7.<br><em>Наказание:</em> мут на 15 минут.</p>
+            
+            <p><strong>1.6.</strong> Запрещено использовать баги/недоработки/эксплойты в своих целях. При обнаружении вы обязаны сообщить об этом администрации.<br><em>Наказание:</em> бан на 1 неделю, при повторном нарушении - перманентный бан.</p>
+            
+            <p><strong>1.7.</strong> Запрещено использовать/создавать контент, связанный с политикой, свастикой, расизмом, нацизмом.<br><em>Наказание:</em> перманентный бан.</p>
+            
+            <p><strong>1.8.</strong> Запрещено покидать разборки обвиняемому игроку или препятствовать ее проведению (игнорировать, заниматься чем-то другим, грубить).<br><em>Наказание:</em> бан на 6 часов.</p>
+            
+            <p><strong>1.9.</strong> Запрещено воровать постройки и коды E2, Starfall, PAC3 без разрешения.<br><em>Наказание:</em> бан на 1 неделю, при повторном нарушении - перманентный бан.</p>
+            
+            <p><strong>1.10.</strong> Запрещено использование любого стороннего ПО.<br><em>Наказание:</em> перманентный бан.</p>
+            
+            <p><strong>1.11.</strong> Запрещено любыми действиями намеренно подставлять других игроков.<br><em>Наказание:</em> перманентный бан.</p>
+            
+            <p><strong>1.12.</strong> Запрещено использование Wire/E2/Glide в целях повышения шансов на убийство игрока (например: радары, телепорты, вх, ракеты и прочее).<br><em>Наказание:</em> бан на 1 час, при повторных нарушениях - бан на 3 часа.</p>
+            <ul class="sub-list">
+                <li><strong>Исключение 1:</strong> разрешено использование Wire/E2 на своей базе с соблюдением следующих условий: обозначение зоны стрельбы, умеренный урон (не более 20 за 1 снаряд); в транспорте (средстве передвижения) - категорически запрещено.</li>
+                <li><strong>Исключение 2:</strong> Разрешено использование техники, созданной с помощью Wiremod, только при соблюдении следующих условий:
+                    <ul>
+                        <li>Техника должна быть уничтожаемой без серьёзных трудностей для других игроков.</li>
+                        <li>Наносимый техникой урон не должен быть чрезмерным или имбалансным и не должен давать нечестное преимущество либо создавать явный перевес сил в бою.</li>
+                        <li>Любая техника применяемая в ПВП, должна уничтожаться обычным оружием, доступным игрокам.</li>
+                        <li>Максимальный запас здоровья любой ПВП-техники или защиты не должен превышать 6000 HP и должен быть пропорционален размеру модели и её хитбоксу.</li>
+                    </ul>
+                </li>
+                <li><strong>Перевесом сил считается ситуация, при которой:</strong>
+                    <ul>
+                        <li>противник не имеет возможности эффективно противостоять технике стандартными игровыми средствами;</li>
+                        <li>либо преимущество одной стороны настолько велико, что делает бой односторонним и лишённым смысла.</li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <p><strong>1.13.</strong> При проектировании базы необходимо соблюдать следующие пункты: база рейдопригодна, высота прохода не менее стандартной модели игрока, находится не в воздухе, без двухстороннего материала, не более 2 Fading Door, без лабиринтов, препятствий, замедляющих проход игрока. Любое нарушение условий - нарушение.<br><em>Наказание:</em> снос базы и джайл на 15 минут, при повторных нарушениях - бан на 3 часа.</p>
+            
+            <p><strong>1.14.</strong> Запрещены любые виды абуза (злоупотребление игровых механик, недоработок).<br><em>Наказание:</em> бан на 3 часа, при повторных нарушениях - бан на 12 часов.</p>
+            
+            <p><strong>1.15.</strong> NSFW скины запрещены.<br><em>Наказание:</em> смена скина, при повторных нарушениях - бан на 3 часа.</p>
+            
+            <p><strong>1.16.</strong> Запрещены анимации в модели игрока, сбивающие с толку (например: в PvP игрок использует анимацию, при которой не ясны его действия).<br><em>Наказание:</em> бан на день.</p>
+
+            <h2>2. Правила для администрации</h2>
+            <p><strong>2.1.</strong> Не допускается аннулирование решений, принятых вышестоящим административным составом (например: Модератор разбанил игрока, который получил бан от Администратора).<br><em>Наказание:</em> снятие привилегии.</p>
+            <p><strong>2.2.</strong> Запрещено очищать карту без предупреждения и голосования (кроме критических случаев).<br><em>Наказание:</em> выговор.</p>
+            <p><strong>2.3.</strong> Администрации запрещено выдавать наказания без указания причины.<br><em>Наказание:</em> выговор.</p>
+            <p><strong>2.4.</strong> Администрации запрещается игнорировать любые запросы игроков.<br><em>Наказание:</em> выговор.</p>
+            <p><strong>2.5.</strong> Администрации запрещено использовать свои права в корыстных целях; закрывать глаза на какие-либо проступки; преувеличивать свои права.<br><em>Наказание:</em> выговор.</p>
+            <p><strong>2.6.</strong> Правом игнорировать или изменять правила обладают только Владельцы. Также, за ним закрепляется право не объяснять причину выдачи наказания.</p>
+            <p><strong>2.7.</strong> Администрация обязана иметь при себе доказательства вины игрока перед вынесением вердикта (логи/демонстрация экрана/свидетели из высшей администрации).</p>
+            <p><strong>2.8.</strong> У администраторов (менеджеры и владельцы) есть админские суперсилы, позволяющие им использовать специальные внутренние инструменты и расширенные функции системы абсолютно легально.</p>
+            <p><strong>2.9.</strong> Рангу Модератор, Администратор (за исключением Суперадмин и менеджер, Инженер) запрещаются оскорбления игроков в любой форме, игроки имеют полное право пожаловаться на администратора с предоставлением доказательств (3 жалобы - выговор - снятие).</p>
+
+            <h2>3. Дополнительный раздел</h2>
+            <p><strong>3.1.</strong> При заходе на сервер, игрок автоматически соглашается с правилами сервера. В случае его несогласия ему необходимо покинуть сервер.</p>
+            <p><strong>3.2.</strong> При подключении к серверу игрок соглашается с тем, что Администрация вправе собирать, хранить и обрабатывать их данные.</p>
+            <p><strong>3.3.</strong> Администрация обязуется не передавать персональные данные третьим лицам, за исключением случаев, предусмотренных законодательством или необходимых для расследования нарушений. В случае появления сомнений у Администрации, она вправе запросить у игрока подтверждение этих данных (в случае отказа - игрок получает перманентный бан).</p>
+            <p><strong>3.4.</strong> Только ранг Суперадмин имеет право нарушать правила.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
