@@ -206,6 +206,70 @@
             letter-spacing: 0.5px;
         }
 
+        /* ===== Стили для страницы "Админ-состав" ===== */
+        .admin-group {
+            margin-bottom: 2rem;
+        }
+
+        .admin-group h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            color: var(--accent-hover);
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            letter-spacing: 0.5px;
+        }
+
+        .admin-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-left: 4px;
+        }
+
+        .admin-list li {
+            position: relative;
+            padding: 6px 10px 6px 22px;
+            font-size: 0.98rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .admin-list li::before {
+            content: "•";
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            color: var(--accent-hover);
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .admin-list li:hover {
+            background: rgba(139, 92, 246, 0.12);
+        }
+
+        .admin-list li strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .admin-list li .role {
+            color: var(--text-muted);
+        }
+
+        /* Цветовые акценты буллета по рангам */
+        .admin-group.dev .admin-list li::before        { color: #fbbf24; }
+        .admin-group.superadmin .admin-list li::before { color: #f87171; }
+        .admin-group.admin .admin-list li::before      { color: var(--accent-hover); }
+        .admin-group.moder .admin-list li::before      { color: #34d399; }
+
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .page { padding: 30px 20px; }
@@ -223,6 +287,7 @@
         <div class="btn-group">
             <button onclick="showPage('connect')">Подключиться</button>
             <button onclick="showPage('rules')">Правила</button>
+            <button onclick="showPage('admins')">Админ-состав</button>
         </div>
         <p class="beta-warning">Это бета версия сайта, мы просим прощение за малое количество предоставленной информации, в скором времени сайт станет лучше!</p>
     </div>
@@ -249,6 +314,54 @@
 				<a href="steam://connect/188.127.241.201:28118" style="display: inline-block; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; color: #fff; background-color: var(--accent-hover); border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.2s ease;">ПОДКЛЮЧИТЬСЯ</a>
 			</div>
 		</div>
+    </div>
+
+    <!-- Страница админ-состава -->
+    <div id="admins" class="page">
+        <button class="back-btn" onclick="showPage('home')">← Назад</button>
+        <h2 style="text-align: center; color: var(--accent-hover); margin-bottom: 1.8rem;">Админ-состав</h2>
+        <div class="content">
+
+            <!-- РАЗРАБОТЧИКИ -->
+            <div class="admin-group dev">
+                <h3>🛠 Разработчики</h3>
+                <ul class="admin-list">
+                    <!-- Формат: <strong>Ник</strong> — <span class="role">за что отвечает</span> -->
+                    <li><strong>HORLEY</strong> — <span class="role">Главный разраб / Хостер сервера, отвечает за моды и разработку Lua-Скриптов</span></li>
+                    <li><strong>LolDoor</strong> — <span class="role">Второй разработчик, отвечает за редактирование / доработку правил, разработку и деплой этого сайта а также настройку ULX в нутри сервера</span></li>
+                    <!-- Добавляй новых разрабов сюда такой же строкой -->
+                </ul>
+            </div>
+
+            <!-- СУПЕРАДМИНЫ -->
+            <div class="admin-group superadmin">
+                <h3>👑 СуперАдмины</h3>
+                <ul class="admin-list">
+                    <li><strong>Andryha</strong> — <span class="role">Контроль сервера, рекомендовщик модов на сервер</span></li>
+                    <li><strong>B1psi</strong> — <span class="role">Довереный админ, хорошо справляется со своей ролью</span></li>
+                    <!-- Добавляй новых суперадминов сюда -->
+                </ul>
+            </div>
+
+            <!-- АДМИНЫ -->
+            <div class="admin-group admin">
+                <h3>🛡 Админы</h3>
+                <ul class="admin-list">
+                    <li><strong>ylifo335</strong> — <span class="role">Младший брат разработчика сервера за это награждён админкой</span></li>
+                    <!-- Добавляй новых админов сюда -->
+                </ul>
+            </div>
+
+            <!-- МОДЕРАТОРЫ -->
+            <div class="admin-group moder">
+                <h3>🔧 Модераторы</h3>
+                <ul class="admin-list">
+                    <li><strong>jet</strong> — <span class="role">По неизвестной причине был добавлен в ранг разработчиков (DEV) и по неизвестной причине был понижен до модера</span></li>
+                    <!-- Добавляй новых модеров сюда -->
+                </ul>
+            </div>
+
+        </div>
     </div>
 
     <!-- Страница правил -->
@@ -339,7 +452,8 @@
 				• Изменено правило 3.4<br>
 				• Айпи сервера "main>Подключится" заменён на актуальный<br>
 				• Удалено упоминание о несуществующих рангах таких как Менеджер и Инженер<br>
-				• Добавлено быстрое подключение в main>Подключится
+				• Добавлено быстрое подключение в main>Подключится<br>
+				• Добавлена страница "Админ-состав"
 			</div>
         </div>
     </div>
