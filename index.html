@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 20px 80px; /* Отступ снизу для футера */
+            padding: 20px 20px 80px;
             overflow-x: hidden;
         }
 
@@ -162,7 +162,6 @@
             text-align: left;
         }
 
-        /* Новые стили */
         .beta-warning {
             text-align: center;
             margin-top: 2rem;
@@ -207,9 +206,7 @@
         }
 
         /* ===== Стили для страницы "Админ-состав" ===== */
-        .admin-group {
-            margin-bottom: 2rem;
-        }
+        .admin-group { margin-bottom: 2rem; }
 
         .admin-group h3 {
             display: flex;
@@ -251,20 +248,10 @@
             line-height: 1.4;
         }
 
-        .admin-list li:hover {
-            background: rgba(139, 92, 246, 0.12);
-        }
+        .admin-list li:hover { background: rgba(139, 92, 246, 0.12); }
+        .admin-list li strong { color: #fff; font-weight: 700; }
+        .admin-list li .role { color: var(--text-muted); }
 
-        .admin-list li strong {
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .admin-list li .role {
-            color: var(--text-muted);
-        }
-
-        /* Цветовые акценты буллета по рангам */
         .admin-group.dev .admin-list li::before        { color: #fbbf24; }
         .admin-group.superadmin .admin-list li::before { color: #f87171; }
         .admin-group.admin .admin-list li::before      { color: var(--accent-hover); }
@@ -339,19 +326,47 @@
             text-transform: uppercase;
         }
 
-        .news-text {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
+        .news-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
         .news-text strong { color: #fff; }
 
-        /* Кнопка-гамбургер для узких экранов */
+        /* ============ КНОПКА РЕПОРТЫ / ИДЕИ ============ */
+        .support-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+            transition: all 0.25s ease;
+        }
+
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+        }
+
+        .support-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Кнопка-гамбургер для мобилок */
         .news-toggle {
             display: none;
             position: fixed;
-            top: 20px;
+            top: 80px; /* Сдвинули ниже кнопки поддержки */
             right: 20px;
             z-index: 101;
             width: 48px;
@@ -377,40 +392,24 @@
             transform: translateY(-2px);
         }
 
-        .news-toggle::before {
-            content: '☰';
-            font-weight: 700;
-            line-height: 1;
-        }
+        .news-toggle::before { content: '☰'; font-weight: 700; line-height: 1; }
+        .news-toggle.is-open::before { content: '✕'; }
 
-        .news-toggle.is-open::before {
-            content: '✕';
-        }
-
-        /* Широкие экраны: сдвигаем контент вправо, чтобы не перекрывал сайдбар */
         @media (min-width: 1200px) {
-            body {
-                padding-left: max(20px, calc(1560px - 100vw));
-            }
+            body { padding-left: max(20px, calc(1560px - 100vw)); }
         }
 
-        /* Узкие экраны: сайдбар прячется, показываем кнопку */
         @media (max-width: 1199px) {
-            .news-sidebar {
-                transform: translateX(-120%);
-            }
-            .news-sidebar.open {
-                transform: translateX(0);
-            }
-            .news-toggle {
-                display: flex;
-            }
+            .news-sidebar { transform: translateX(-120%); }
+            .news-sidebar.open { transform: translateX(0); }
+            .news-toggle { display: flex; }
         }
 
         @media (max-width: 500px) {
-            .news-sidebar {
-                width: calc(100vw - 40px);
-            }
+            .news-sidebar { width: calc(100vw - 40px); }
+            /* На маленьких экранах прячем текст кнопки, оставляем только иконку для компактности */
+            .support-btn span { display: none; }
+            .support-btn { padding: 12px; }
         }
 
         @media (max-width: 600px) {
@@ -427,13 +426,8 @@
 <aside class="news-sidebar" id="newsSidebar">
     <h2>📰 Новости</h2>
     <div class="news-list">
-        <!--
-            КАК ДОБАВИТЬ НОВОСТЬ:
-            Скопируй блок <div class="news-item">...</div> и вставь сверху.
-            Поменяй дату и текст. Всё.
-        -->
 		<div class="news-item">
-            <div class="news-date">07.11.2026📌</div>
+            <div class="news-date">07.11.2026 📌</div>
             <div class="news-text">Если ты смотришь это из меню motd то знай сайт доступен как на компе так и на телефоне https://loldoor.github.io/Stroy/ </div>
         </div>
         <div class="news-item">
@@ -445,8 +439,8 @@
             <div class="news-text">Рангу superadmin были отключены некоторые возможности которые касаются серверной части а так же отключено выполнение команд в консоли со стороны клиента другого игрока</div>
         </div>
         <div class="news-item">
-            <div class="news-date">07.11.2026(05:12)</div>
-            <div class="news-text">я LolDoor я уже 4 часа ебашу этот сайт надеюсь хорлей оценит когда зайдёт</div>
+            <div class="news-date">07.11.2026(05:19)</div>
+            <div class="news-text">я LolDoor я ебашу этот сайт уже 4 часа я надеюсь хорлей оценит</div>
         </div>
         <div class="news-item">
             <div class="news-date">07.11.2026</div>
@@ -455,7 +449,15 @@
     </div>
 </aside>
 
-<!-- Кнопка открытия сайдбара (видна только на узких экранах) -->
+<!-- ================= КНОПКА РЕПОРТЫ / ИДЕИ ================= -->
+<!-- ВАЖНО: Замени ссылку ниже на свой инвайт Discord или на ссылку Telegram (например, https://t.me/твой_канал) -->
+<a href="https://hack.chat/?HardHatRepId" target="_blank" class="support-btn" title="Репорты и идеи">
+    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+    <span>Репорты / Идеи</span>
+</a>
+<!-- ==================================================== -->
+
+<!-- Кнопка открытия сайдбара -->
 <button class="news-toggle" id="newsToggle" aria-label="Показать новости"></button>
 <!-- ==================================================== -->
 
@@ -470,7 +472,6 @@
         </div>
         <p class="beta-warning">Это бета версия сайта, мы просим прощение за малое количество предоставленной информации, в скором времени сайт станет лучше!</p>
 
-        <!-- Апдейт-лист (перенесён со страницы правил) -->
         <div class="rules-notice">
             <strong>Update v1.3:</strong><br>
             • fix перемещение наказания 2.8 в переменную ul class="sub-list"<br>
@@ -480,7 +481,8 @@
             • Добавлено быстрое подключение в main>Подключится<br>
             • Добавлена страница "Админ-состав"<br>
 			• Сайт отображается в меню motd при заходе на сервер, либо же при вписывании "ulx motd" в консоль находясь на сервере<br>
-			• Добавлены новости
+			• Добавлены новости<br>
+            • Добавлена кнопка "Репорты / Идеи"
         </div>
     </div>
 
@@ -513,45 +515,32 @@
         <button class="back-btn" onclick="showPage('home')">← Назад</button>
         <h2 style="text-align: center; color: var(--accent-hover); margin-bottom: 1.8rem;">Админ-состав</h2>
         <div class="content">
-
-            <!-- РАЗРАБОТЧИКИ -->
             <div class="admin-group dev">
                 <h3>🛠 Разработчики</h3>
                 <ul class="admin-list">
-                    <!-- Формат: <strong>Ник</strong> — <span class="role">за что отвечает</span> -->
                     <li><strong>HORLEY</strong> — <span class="role">Главный разраб / Хостер сервера, отвечает за моды и разработку Lua-Скриптов</span></li>
                     <li><strong>LolDoor</strong> — <span class="role">Второй разработчик, отвечает за редактирование / доработку правил, разработку и деплой этого сайта а также настройку ULX внутри сервера</span></li>
-                    <!-- Добавляй новых разрабов сюда такой же строкой -->
                 </ul>
             </div>
-
-            <!-- СУПЕРАДМИНЫ -->
             <div class="admin-group superadmin">
                 <h3>👑 СуперАдмины</h3>
                 <ul class="admin-list">
                     <li><strong>Andryha</strong> — <span class="role">Контроль сервера, рекомендовщик модов на сервер</span></li>
                     <li><strong>B1psi</strong> — <span class="role">Довереный админ, хорошо справляется со своей ролью</span></li>
-                    <!-- Добавляй новых суперадминов сюда -->
                 </ul>
             </div>
-
-            <!-- АДМИНЫ -->
             <div class="admin-group admin">
                 <h3>🛡 Админы</h3>
                 <ul class="admin-list">
                     <li><strong>ylifo335</strong> — <span class="role">Младший брат разработчика сервера за это награждён админкой</span></li>
-                    <!-- Добавляй новых админов сюда -->
                 </ul>
             </div>
-
-            <!-- МОДЕРАТОРЫ -->
             <div class="admin-group moder">
                 <h3>🔧 Модераторы</h3>
                 <ul class="admin-list">
                     <li><strong>jet</strong> — <span class="role">По неизвестной причине был добавлен в ранг разработчиков (DEV) и по неизвестной причине был понижен до модера</span></li>
                 </ul>
             </div>
-
         </div>
     </div>
 
@@ -561,27 +550,16 @@
         <div class="content">
             <h2>1. Общее положение</h2>
 			<p><strong>1.1.</strong> Запрещено создавать помеху другим игрокам, находящимся в Build Mode, PvP (God Mode = Build Mode) или игрокам от ранга Администратор.<br><em>Наказание:</em> джайл на 10 минут, при повторных нарушениях - бан на 3 часа.</p>
-            
             <p><strong>1.2.</strong> Запрещено своими действиями нарушать функционирование сервера, вызывая лаги/вылеты/краши.<br><em>Наказание:</em> перманентный бан.</p>
-            
             <p><strong>1.3.</strong> Запрещено любыми способами обходить наказание, назначенное администрацией сервера.<br><em>Наказание:</em> бан на 3 дня.</p>
-            
             <p><strong>1.4.</strong> Проп пуш, проп блок, проп флай, проп килл и проп серфинг запрещены.<br><em>Наказание:</em> 10 минут джайла, при повторных нарушениях - бан на 1 час.</p>
-            
             <p><strong>1.5.</strong> Запрещены спам, флуд, изменение голоса, раздражающие/неприятные звуки; проигрывание посторонних звуков.<br><em>Исключение:</em> разрешено в локальном режиме, если музыка не нарушает 1.7.<br><em>Наказание:</em> мут на 15 минут.</p>
-            
             <p><strong>1.6.</strong> Запрещено использовать баги/недоработки/эксплойты в своих целях. При обнаружении вы обязаны сообщить об этом администрации.<br><em>Наказание:</em> бан на 1 неделю, при повторном нарушении - перманентный бан.</p>
-            
             <p><strong>1.7.</strong> Запрещено использовать/создавать контент, связанный с политикой, свастикой, расизмом, нацизмом.<br><em>Наказание:</em> перманентный бан.</p>
-            
             <p><strong>1.8.</strong> Запрещено покидать разборки обвиняемому игроку или препятствовать ее проведению (игнорировать, заниматься чем-то другим, грубить).<br><em>Наказание:</em> бан на 6 часов.</p>
-            
             <p><strong>1.9.</strong> Запрещено воровать постройки и коды E2, Starfall, PAC3 без разрешения.<br><em>Наказание:</em> бан на 1 неделю, при повторном нарушении - перманентный бан.</p>
-            
             <p><strong>1.10.</strong> Запрещено использование любого стороннего ПО.<br><em>Наказание:</em> перманентный бан.</p>
-            
             <p><strong>1.11.</strong> Запрещено любыми действиями намеренно подставлять других игроков.<br><em>Наказание:</em> перманентный бан.</p>
-            
             <p><strong>1.12.</strong> Запрещено использование Wire/E2/Glide в целях повышения шансов на убийство игрока (например: радары, телепорты, вх, ракеты и прочее).<br><em>Наказание:</em> бан на 1 час, при повторных нарушениях - бан на 3 часа.</p>
             <ul class="sub-list">
                 <li><strong>Исключение 1:</strong> разрешено использование Wire/E2 на своей базе с соблюдением следующих условий: обозначение зоны стрельбы, умеренный урон (не более 20 за 1 снаряд); в транспорте (средстве передвижения) - категорически запрещено.</li>
@@ -600,17 +578,11 @@
                     </ul>
                 </li>
             </ul>
-            
             <p><strong>1.13.</strong> При проектировании базы необходимо соблюдать следующие пункты: база рейдопригодна, высота прохода не менее стандартной модели игрока, находится не в воздухе, без двухстороннего материала, не более 2 Fading Door, без лабиринтов, препятствий, замедляющих проход игрока. Любое нарушение условий - нарушение.<br><em>Наказание:</em> снос базы и джайл на 15 минут, при повторных нарушениях - бан на 3 часа.</p>
-            
             <p><strong>1.14.</strong> Запрещены любые виды абуза (злоупотребление игровых механик, недоработок).<br><em>Наказание:</em> бан на 3 часа, при повторных нарушениях - бан на 12 часов.</p>
-            
             <p><strong>1.15.</strong> NSFW скины запрещены.<br><em>Наказание:</em> смена скина, при повторных нарушениях - бан на 3 часа.</p>
-            
             <p><strong>1.16.</strong> Запрещены анимации в модели игрока, сбивающие с толку (например: в PvP игрок использует анимацию, при которой не ясны его действия).<br><em>Наказание:</em> бан на день.</p>
-
             <p><strong>1.17.</strong> Запрещены невидимые/микро скины.<br><em>Наказание: джаил 10 минут, при повторном нарушении бан на 1 день</em></p>
-
 			<ul class="sub-list">
 			<li><strong>Исключение:</strong> разрешено использование мини (не невидимых) скинов если вы находитесь в Build моде.</li>
 			</ul>
@@ -625,8 +597,8 @@
             <p><strong>2.7.</strong> Администрация обязана иметь при себе доказательства вины игрока перед вынесением вердикта (логи/демонстрация экрана/свидетели из высшей администрации).</p>
             <p><strong>2.8.</strong> У администраторов (суперадмины и владельцы) есть админские суперсилы, позволяющие им использовать специальные внутренние инструменты и расширенные функции системы абсолютно легально.</p>
 			<ul class="sub-list">
-                <li><strong>Уточнение 1:</strong>Использование любого оружия, доступного донатерам в том числе и рангу DEV (включая Davy Crockett, M202 и маркер орбитального удара — Orbital Strike Marker), <strong>строго запрещено</strong> на сервере в любых целях и количествах.</li>
-                <li><strong>Уточнение 2:</strong>Категорически запрещается спавнить боеприпасы из вкладки «Энтити» (А именно из раздела M9K Ammunition) с целью их последующего подрыва или создания цепной реакции взрывов.</li><em>Наказание:</em> выговор (3 выговора - снятие).</p>
+                <li><strong>Уточнение 1:</strong> Использование любого оружия, доступного донатерам в том числе и рангу DEV (включая Davy Crockett, M202 и маркер орбитального удара — Orbital Strike Marker), <strong>строго запрещено</strong> на сервере в любых целях и количествах.</li>
+                <li><strong>Уточнение 2:</strong> Категорически запрещается спавнить боеприпасы из вкладки «Энтити» (А именно из раздела M9K Ammunition) с целью их последующего подрыва или создания цепной реакции взрывов.</li><em>Наказание:</em> выговор (3 выговора - снятие).</p>
             </ul>
 			
             <p><strong>2.9.</strong> Рангу Модератор, Администратор (за исключением Суперадмин и DEV) запрещаются оскорбления игроков в любой форме, игроки имеют полное право пожаловаться на администратора с предоставлением доказательств (3 жалобы - выговор - снятие).</p>
@@ -646,11 +618,11 @@
 </footer>
 
 <script>
+    // Переключение страниц
     function showPage(pageId) {
         document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         window.scrollTo(0, 0);
-        // Закрываем сайдбар при переходе (актуально для узких экранов)
         document.getElementById('newsSidebar').classList.remove('open');
         document.getElementById('newsToggle').classList.remove('is-open');
     }
