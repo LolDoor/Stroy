@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,7 +18,7 @@
             --warning-border: rgba(251, 191, 36, 0.3);
             --warning-text: #fbbf24;
         }
-
+ 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
@@ -32,13 +33,13 @@
             padding: 20px 20px 80px;
             overflow-x: hidden;
         }
-
+ 
         .container {
             width: 100%;
             max-width: 900px;
             position: relative;
         }
-
+ 
         .page {
             display: none;
             background: var(--glass-bg);
@@ -50,14 +51,14 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
             animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+ 
         .page.active { display: block; }
-
+ 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
+ 
         h1 {
             font-size: 3.2rem;
             text-align: center;
@@ -65,7 +66,7 @@
             color: #f1f1f1;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-
+ 
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -73,7 +74,7 @@
             max-width: 280px;
             margin: 0 auto;
         }
-
+ 
         button {
             padding: 14px 28px;
             font-size: 1.1rem;
@@ -87,15 +88,15 @@
             color: white;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-
+ 
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
             background: #2a2a2a;
         }
-
+ 
         button:active { transform: translateY(0); }
-
+ 
         .back-btn {
             position: absolute;
             top: 1.5rem;
@@ -106,9 +107,9 @@
             box-shadow: none;
             z-index: 10;
         }
-
+ 
         .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: none; }
-
+ 
         .content {
             margin-top: 1rem;
             line-height: 1.6;
@@ -117,11 +118,11 @@
             overflow-y: auto;
             padding-right: 10px;
         }
-
+ 
         .content::-webkit-scrollbar { width: 6px; }
         .content::-webkit-scrollbar-track { background: transparent; }
         .content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
-
+ 
         .content h2 {
             color: var(--accent-hover);
             margin: 2rem 0 1rem;
@@ -130,7 +131,7 @@
             padding-bottom: 0.5rem;
         }
         .content h2:first-child { margin-top: 0; }
-
+ 
         .content p { margin-bottom: 1rem; }
         .content strong { color: #fff; }
         .content em { color: #fbbf24; font-style: normal; }
@@ -141,7 +142,7 @@
             font-family: 'Consolas', monospace;
             color: #34d399;
         }
-
+ 
         .sub-list {
             list-style: none;
             margin: 0.5rem 0 1rem 1.5rem;
@@ -150,7 +151,7 @@
         }
         .sub-list li { margin-bottom: 0.4rem; position: relative; }
         .sub-list li::before { content: "•"; color: var(--accent); margin-right: 8px; }
-
+ 
         .instruction-box {
             background: rgba(0,0,0,0.2);
             border: 1px dashed var(--accent);
@@ -159,7 +160,7 @@
             margin: 20px 0;
             text-align: left;
         }
-
+ 
         .beta-warning {
             text-align: center;
             margin-top: 2rem;
@@ -171,7 +172,7 @@
             margin-right: auto;
             line-height: 1.4;
         }
-
+ 
         .rules-notice {
             margin-top: 2rem;
             padding: 1rem;
@@ -184,7 +185,7 @@
             text-align: center;
             font-weight: 500;
         }
-
+ 
         .site-footer {
             width: 100%;
             max-width: 900px;
@@ -195,17 +196,17 @@
             font-size: 0.9rem;
             opacity: 0.85;
         }
-
+ 
         .site-footer .credits {
             font-size: 0.8rem;
             margin-top: 4px;
             opacity: 0.6;
             letter-spacing: 0.5px;
         }
-
+ 
         /* ===== Стили для страницы "Админ-состав" ===== */
         .admin-group { margin-bottom: 2rem; }
-
+ 
         .admin-group h3 {
             display: flex;
             align-items: center;
@@ -217,7 +218,7 @@
             border-bottom: 1px solid var(--glass-border);
             letter-spacing: 0.5px;
         }
-
+ 
         .admin-list {
             list-style: none;
             display: flex;
@@ -225,7 +226,7 @@
             gap: 6px;
             padding-left: 4px;
         }
-
+ 
         .admin-list li {
             position: relative;
             padding: 6px 10px 6px 22px;
@@ -235,7 +236,7 @@
             border-radius: 8px;
             transition: background 0.2s ease;
         }
-
+ 
         .admin-list li::before {
             content: "•";
             position: absolute;
@@ -245,16 +246,16 @@
             font-size: 1.1rem;
             line-height: 1.4;
         }
-
+ 
         .admin-list li:hover { background: rgba(255, 255, 255, 0.08); }
         .admin-list li strong { color: #fff; font-weight: 700; }
         .admin-list li .role { color: var(--text-muted); }
-
+ 
         .admin-group.dev .admin-list li::before        { color: #fbbf24; }
         .admin-group.superadmin .admin-list li::before { color: #f87171; }
         .admin-group.admin .admin-list li::before      { color: var(--accent-hover); }
         .admin-group.moder .admin-list li::before      { color: #34d399; }
-
+ 
         /* ============ НОВОСТНОЙ САЙДБАР ============ */
         .news-sidebar {
             position: fixed;
@@ -275,7 +276,7 @@
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
-
+ 
         .news-sidebar h2 {
             font-size: 1.2rem;
             color: var(--accent-hover);
@@ -285,7 +286,7 @@
             letter-spacing: 1px;
             text-align: center;
         }
-
+ 
         .news-list {
             flex: 1 1 auto;
             min-height: 0;
@@ -295,11 +296,11 @@
             gap: 8px;
             padding-right: 4px;
         }
-
+ 
         .news-list::-webkit-scrollbar { width: 4px; }
         .news-list::-webkit-scrollbar-track { background: transparent; }
         .news-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
-
+ 
         .news-item {
             padding: 10px 12px;
             background: rgba(255, 255, 255, 0.04);
@@ -308,13 +309,13 @@
             border-radius: 10px;
             transition: all 0.2s ease;
         }
-
+ 
         .news-item:hover {
             background: rgba(255, 255, 255, 0.08);
             border-left-color: var(--accent-hover);
             transform: translateX(2px);
         }
-
+ 
         .news-date {
             font-size: 0.72rem;
             color: var(--accent-hover);
@@ -323,10 +324,10 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
-
+ 
         .news-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.4; }
         .news-text strong { color: #fff; }
-
+ 
         /* ============ КНОПКА РЕПОРТЫ / ИДЕИ ============ */
         .support-btn {
             position: fixed;
@@ -347,20 +348,20 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             transition: all 0.25s ease;
         }
-
+ 
         .support-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
             background: #2a2a2a;
             color: #fff;
         }
-
+ 
         .support-btn svg {
             width: 18px;
             height: 18px;
             fill: currentColor;
         }
-
+ 
         /* Кнопка-гамбургер для мобилок */
         .news-toggle {
             display: none;
@@ -385,50 +386,104 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             transition: all 0.25s ease;
         }
-
+ 
         .news-toggle:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: translateY(-2px);
         }
-
+ 
         .news-toggle::before { content: '☰'; font-weight: 700; line-height: 1; }
         .news-toggle.is-open::before { content: '✕'; }
-
+ 
         @media (min-width: 1200px) {
             body { padding-left: max(20px, calc(1560px - 100vw)); }
         }
-
+ 
         @media (max-width: 1199px) {
             .news-sidebar { transform: translateX(-120%); }
             .news-sidebar.open { transform: translateX(0); }
             .news-toggle { display: flex; }
         }
-
+ 
         @media (max-width: 500px) {
             .news-sidebar { width: calc(100vw - 40px); }
             /* На маленьких экранах прячем текст кнопки, оставляем только иконку для компактности */
             .support-btn span { display: none; }
             .support-btn { padding: 12px; }
         }
-
+ 
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .page { padding: 30px 20px; }
             .back-btn { top: 1rem; left: 1rem; }
             .beta-warning, .rules-notice { font-size: 0.85rem; }
         }
+ 
+        /* ============ LIQUID GLASS (стиль iOS) ============ */
+        button,
+        .back-btn,
+        .support-btn,
+        .news-toggle,
+        .glass-link {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.04) 45%, rgba(255,255,255,0.10) 100%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+            box-shadow:
+                inset 0 1px 1px rgba(255, 255, 255, 0.45),
+                inset 0 -1px 1px rgba(255, 255, 255, 0.10),
+                inset 0 0 14px rgba(255, 255, 255, 0.06),
+                0 8px 24px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        background 0.25s ease, box-shadow 0.25s ease;
+        }
+ 
+        button:hover,
+        .back-btn:hover,
+        .support-btn:hover,
+        .news-toggle:hover,
+        .glass-link:hover {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.16) 100%);
+            box-shadow:
+                inset 0 1px 1px rgba(255, 255, 255, 0.6),
+                inset 0 -1px 1px rgba(255, 255, 255, 0.15),
+                inset 0 0 18px rgba(255, 255, 255, 0.10),
+                0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+ 
+        button:active,
+        .back-btn:active,
+        .support-btn:active,
+        .news-toggle:active,
+        .glass-link:active {
+            transform: scale(0.96);
+        }
+ 
+        .glass-link {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .glass-link:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body>
-
+ 
 <!-- ================= НОВОСТНОЙ САЙДБАР ================= -->
 <aside class="news-sidebar" id="newsSidebar">
     <h2>📰 Новости</h2>
     <div class="news-list">
-	    <div class="news-item">
-			<div class="news-date">20.11.2026 </div>
-            <div class="news-text">Тема сайта изменена на чёрный</div>
-		</div>
+		<div class="news-item">
+            <div class="news-date">20.11.2026 </div>
+            <div class="news-text">Тема сайта изменена на чёрную</div>
+        </div>
 		<div class="news-item">
             <div class="news-date">08.11.2026 </div>
             <div class="news-text">Сделано новое таб меню, но horley спит и без него я не могу его добавить у меня нету доступа к файлам сервера, новый таб будет выпущен в тест примерно днём либо вечером восьмого ноября </div>
@@ -452,7 +507,7 @@
         </div>
     </div>
 </aside>
-
+ 
 <!-- ================= КНОПКА РЕПОРТЫ / ИДЕИ ================= -->
 <!-- ВАЖНО: Замени ссылку ниже на свой инвайт Discord или на ссылку Telegram (например, https://t.me/твой_канал) -->
 <a href="https://hack.chat/?HardHatRepId" target="_blank" class="support-btn" title="Репорты и идеи">
@@ -461,11 +516,11 @@
 		(Не работает в ULX motd)</span>
 </a>
 <!-- ==================================================== -->
-
+ 
 <!-- Кнопка открытия сайдбара -->
 <button class="news-toggle" id="newsToggle" aria-label="Показать новости"></button>
 <!-- ==================================================== -->
-
+ 
 <div class="container">
     <!-- Главная страница -->
     <div id="home" class="page active">
@@ -476,7 +531,7 @@
             <button onclick="showPage('admins')">Админ-состав</button>
         </div>
         <p class="beta-warning">Это бета версия сайта, мы просим прощение за малое количество предоставленной информации, в скором времени сайт станет лучше!</p>
-
+ 
         <div class="rules-notice">
             <strong>Update v1.3:</strong><br>
             • fix перемещение наказания 2.8 в переменную ul class="sub-list"<br>
@@ -490,7 +545,7 @@
             • Добавлена кнопка "Репорты / Идеи"
         </div>
     </div>
-
+ 
     <!-- Страница подключения -->
     <div id="connect" class="page">
         <button class="back-btn" onclick="showPage('home')">← Назад</button>
@@ -510,11 +565,11 @@
 			<div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px dashed rgba(255, 255, 255, 0.15);">
 				<p style="font-size: 1.4rem; font-weight: bold; color: var(--accent-hover); margin-bottom: 15px; letter-spacing: 2px;">ИЛИ</p>
 				<h3 style="margin-bottom: 15px; color: #fff;">Быстрое подключение</h3>
-				<a href="steam://connect/188.127.241.201:28118" style="display: inline-block; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; color: #121212; background-color: var(--accent-hover); border-radius: 8px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: all 0.2s ease;">ПОДКЛЮЧИТЬСЯ</a>
+				<a href="steam://connect/188.127.241.201:28118" class="glass-link">ПОДКЛЮЧИТЬСЯ</a>
 			</div>
 		</div>
     </div>
-
+ 
     <!-- Страница админ-состава -->
     <div id="admins" class="page">
         <button class="back-btn" onclick="showPage('home')">← Назад</button>
@@ -548,7 +603,7 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- Страница правил -->
     <div id="rules" class="page">
         <button class="back-btn" onclick="showPage('home')">← Назад</button>
@@ -592,7 +647,7 @@
 			<li><strong>Исключение:</strong> разрешено использование мини (не невидимых) скинов если вы находитесь в Build моде.</li>
 			</ul>
 			<p><strong>1.18</strong> Категорически запрещается спавнить боеприпасы из вкладки «Энтити» (А именно из раздела M9K Ammunition) с целью их последующего подрыва или создания цепной реакции взрывов.<br><em>Наказание:</em> Джаил 10 минут, при повторных нарушениях - бан на 3 часа</p>
-
+ 
 			<h2>2. Правила для администрации</h2>
             <p><strong>2.1.</strong> Не допускается аннулирование решений, принятых вышестоящим административным составом (например: Модератор разбанил игрока, который получил бан от Администратора).<br><em>Наказание:</em> снятие привилегии.</p>
             <p><strong>2.2.</strong> Запрещено очищать карту без предупреждения и голосования (кроме критических случаев).<br><em>Наказание:</em> выговор.</p>
@@ -608,7 +663,7 @@
             </ul>
 			
             <p><strong>2.9.</strong> Рангу Модератор, Администратор (за исключением Суперадмин и DEV) запрещаются оскорбления игроков в любой форме, игроки имеют полное право пожаловаться на администратора с предоставлением доказательств (3 жалобы - выговор - снятие).</p>
-
+ 
             <h2>3. Дополнительный раздел</h2>
             <p><strong>3.1.</strong> При заходе на сервер, игрок автоматически соглашается с правилами сервера. В случае его несогласия ему необходимо покинуть сервер.</p>
             <p><strong>3.2.</strong> При подключении к серверу игрок соглашается с тем, что Администрация вправе собирать, хранить и обрабатывать их данные.</p>
@@ -617,12 +672,12 @@
         </div>
     </div>
 </div>
-
+ 
 <footer class="site-footer">
     <p>С уважением команда "HardHat"</p>
     <p class="credits">Сделал и выложил LolDoor</p>
 </footer>
-
+ 
 <script>
     // Переключение страниц
     function showPage(pageId) {
@@ -632,13 +687,14 @@
         document.getElementById('newsSidebar').classList.remove('open');
         document.getElementById('newsToggle').classList.remove('is-open');
     }
-
+ 
     // Переключение сайдбара новостей
     document.getElementById('newsToggle').addEventListener('click', function () {
         document.getElementById('newsSidebar').classList.toggle('open');
         this.classList.toggle('is-open');
     });
 </script>
-
+ 
 </body>
 </html>
+ 
